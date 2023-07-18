@@ -1,12 +1,3 @@
-# import sys
-# import os
-
-# # Get the current file directory
-# current_dir = os.path.dirname(os.path.abspath(__file__))
-# parent_dir = os.path.dirname(current_dir)
-# util_dir = os.path.join(parent_dir, 'utils')
-# sys.path.append(util_dir)
-
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime,timedelta
