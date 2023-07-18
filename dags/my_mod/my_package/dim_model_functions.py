@@ -4,11 +4,11 @@ class DimModelFunctions:
     def __init__(self, db_connection):
         self.con = db_connection
     
-    def create_raw_comp_data_table(self):
-        sql = """
+    def create_raw_comp_data_table(self, raw_data):
+        sql = f"""
         CREATE OR REPLACE TABLE raw_comp_data AS
         SELECT *
-        FROM read_csv_auto('SorensonworkfirmFIVEdata.csv')
+        FROM read_csv_auto({raw_data})
         """
         self.con.sql(sql)
         

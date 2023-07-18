@@ -1,10 +1,31 @@
+# import sys
+# import os
+
+# # Get the current file directory
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# parent_dir = os.path.dirname(current_dir)
+# util_dir = os.path.join(parent_dir, 'utils')
+# sys.path.append(util_dir)
+
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime,timedelta
-from utils.dim_model_functions import DimModelFunctions
+from my_mod.my_package.dim_model_functions import *  
 import duckdb
 
 
+
+
+# Initial data connection set up
+try:
+    DATA = '..\my_data\SorensonworkfirmFIVEdata.csv'
+    if os.path.isfile(DATA):
+        pass
+except:
+    print(f'Incorrect file path: {DATA}')
+else:
+    print('Error while processing file')
+    
 SCHEMA = 'snow'
 
 # Default args
@@ -25,7 +46,7 @@ def create_schema():
 def extract_create_table():
     con = create_database_connection()
     newdb = DimModelFunctions(con)
-    newdb.create_raw_comp_data_table()
+    newdb.create_raw_comp_data_table(DATA)
     
 def explore_raw_table():
     con = create_database_connection()

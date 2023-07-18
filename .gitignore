@@ -1,2 +1,5 @@
 logs/
 .env
+myenv/
+data/
+utils/
